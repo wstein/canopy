@@ -27,12 +27,13 @@ class Scope {
 }
 
 class Base {
-  static create (outputPath) {
+  static create(outputPath) {
     return new this(outputPath)
   }
 
-  constructor (outputPath) {
+  constructor(outputPath) {
     this._outputPath  = outputPath
+    this._semicolon = true
     this._indentLevel = 0
 
     this._buffers = new Map()
@@ -118,7 +119,7 @@ class Base {
     return this._currentScope.varName(name)
   }
 
-  _line (source, semicolon = true) {
+  _line(source, semicolon = this._semicolon) {
     let i = this._indentLevel
 
     if (source.length > 0) {
